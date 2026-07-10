@@ -1,6 +1,8 @@
 # 🧠 MITOS — Autonomous Local AI
 
-> Arquitectura de IA autónoma que corre **100% en local**: LLM propio, memoria persistente, agente reactivo, auto-modificación de código con *safeguards* y un daemon cognitivo que actúa sin ser invocado. Sin depender de proveedores remotos.
+> Plataforma **experimental** para explorar hasta dónde puede llegar un agente de IA que corre **en local**: LLM propio, memoria persistente, agente reactivo, un daemon que puede actuar sin ser invocado y experimentos de auto-modificación de código con *safeguards*. Proyecto de investigación, no un producto.
+
+**Por qué este proyecto:** nace de una pregunta — ¿cuánta autonomía y utilidad se puede conseguir sin depender de la nube, corriendo todo en una laptop? El objetivo es *explorar* el problema (privacidad, coste, límites de los modelos locales), no afirmar que está resuelto.
 
 <p align="center">
   <img alt="Python" src="https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white">
@@ -11,17 +13,17 @@
 
 ---
 
-## 🎯 Tesis
+## 🎯 Qué explora
 
-MITOS es un experimento de ingeniería que busca **refutar operativamente** cinco supuestos sobre los sistemas de IA autónomos:
+MITOS es un experimento de ingeniería. Cada módulo es una forma de **poner a prueba** una idea sobre sistemas de IA autónomos — no una solución cerrada, sino una hipótesis con código:
 
-| Módulo | Tesis que refuta |
+| Módulo | Idea que explora |
 |--------|------------------|
-| **Distribuido** (P2P + DGC) | que el entrenamiento descentralizado por Internet es impracticable por ancho de banda |
-| **Evolución** (AST) | que la auto-modificación de código causa "suicidio digital" |
-| **Seguridad** (Dead-Man Switch + Shamir) | que un sistema autónomo es vulnerable a extorsión |
-| **Filtrado** (estático) | que evitar el *Model Collapse* requiere supervisión humana |
-| **Daemon cognitivo** | que un agente solo es útil cuando un humano lo invoca |
+| **Distribuido** (P2P + DGC) | ¿puede el entrenamiento descentralizado por Internet ser viable comprimiendo gradientes? |
+| **Evolución** (AST) | ¿puede un programa modificar su propio código sin romperse, con validación estática? |
+| **Seguridad** (Dead-Man Switch + Shamir) | ¿cómo mitigar que un sistema autónomo sea coaccionado o secuestrado? |
+| **Filtrado** (estático) | ¿cuánto del *Model Collapse* se puede evitar con filtros automáticos? |
+| **Daemon cognitivo** | ¿qué pasa si un agente puede tomar iniciativa en vez de esperar a ser invocado? |
 
 ## ✨ Capacidades
 
@@ -72,9 +74,30 @@ python run_daemon.py          # daemon cognitivo autónomo
 - **`config/brain_pool.json`** (API keys) y **`.env`** están en `.gitignore` — **nunca** se versionan. Usa `config/brain_pool.example.json` como plantilla.
 - Los **modelos GGUF**, la carpeta **`data/`** (memoria, rostros/voces registrados) y los **backups** están excluidos del repositorio por privacidad y tamaño.
 
-## 📄 Nota
+## 📊 Benchmarks
 
-Proyecto de investigación/portfolio. La auto-modificación y el daemon operan con *safeguards* conocidos; no se recomienda ejecutarlo sin sandbox. El detalle técnico completo (contratos, invariantes, flujos) está en [`INFORME_FORENSE3.md`](INFORME_FORENSE3.md).
+> ⚠️ **Pendiente de medición.** Al correr con un LLM local, el rendimiento depende del modelo y del hardware, así que prefiero no dar cifras hasta medirlas de forma reproducible. Métricas objetivo:
+
+| Métrica | Cómo se mide | Valor |
+|---------|--------------|-------|
+| Tokens/seg (inferencia local) | `llama-cpp` timings, por modelo (Phi-3 / Qwen2.5) | *por medir* |
+| Latencia primer token | tiempo hasta el primer token en una prompt estándar | *por medir* |
+| RAM pico | `psutil` durante inferencia + daemon activo | *por medir* |
+| Ciclo del daemon | tiempo medio de un ciclo cognitivo completo | *por medir* |
+
+*Entorno de referencia: Windows 11, CPU Intel i5-10300H (AVX2), sin GPU. Cifras concretas por añadir.*
+
+## ⚠️ Limitaciones
+
+Ser honesto sobre lo que **no** es este proyecto es parte del proyecto:
+
+- **No sustituye** un SOC ni ninguna herramienta de seguridad profesional.
+- **No garantiza** seguridad ni robustez: los *safeguards* son experimentales, no auditados.
+- **Requiere sandbox**: la auto-modificación de código y el daemon pueden ejecutar acciones; córrelo aislado.
+- **No usar en producción**: es una plataforma de investigación/portfolio.
+- Los **modelos locales** cuantizados quedan por debajo de los modelos *frontier* en capacidad; el router externo es opcional y de mejor esfuerzo.
+
+El detalle técnico completo (contratos, invariantes, flujos) está en [`INFORME_FORENSE3.md`](INFORME_FORENSE3.md).
 
 ## 🛠️ Stack
 
