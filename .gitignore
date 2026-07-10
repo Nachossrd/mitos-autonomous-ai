@@ -1,0 +1,69 @@
+# =============================================================================
+# Proyecto MITOS - .gitignore
+# =============================================================================
+
+# ----- Secretos / configuración local -----
+# brain_pool.json contiene API keys de Gemini/Groq/OpenRouter — NUNCA commitearlas.
+config/brain_pool.json
+config/*.local.json
+.env
+.env.*
+
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ----- Entornos virtuales -----
+.venv/
+venv/
+env/
+ENV/
+
+# ----- Datos en runtime de MITOS -----
+data/
+.mitos_backups/
+dry_run_*.md
+models/*.gguf
+checkpoints/
+training_examples.jsonl
+
+# ----- IDEs -----
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# ----- Logs -----
+*.log
+logs/
+
+# ----- Modelos LLM locales (GGUF, multi-GB) -----
+models/
+*.gguf
+*.bin
+*.safetensors
+
+
+# ----- Personal / multimedia (nunca publicar) -----
+*.ogg
+*.mp3
+*.wav
+*.m4a
+
+# ----- Backups y basura de comandos rotos -----
+*.bak
+_backups*
+ersmarkuDownloadsMITOS
+t; ast.parse*
+*srccorecode_synthesizer.py*

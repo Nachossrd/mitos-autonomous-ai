@@ -1,0 +1,89 @@
+# ============================================================
+# Proyecto MITOS - Dependencias del MVP
+# Python 3.11+
+# ============================================================
+
+# --- Núcleo de Machine Learning ---
+# PyTorch en modo CPU (el MVP no requiere GPU)
+torch>=2.1.0
+numpy>=1.26.0
+
+# --- Comunicación Distribuida (P2P) ---
+# WebSockets asíncronos para el transporte de gradientes
+websockets>=12.0
+# Cliente/Servidor HTTP asíncrono para descubrimiento de peers y RPC auxiliar
+aiohttp>=3.9.0
+# Serialización binaria rápida (más compacta que pickle para gradientes dispersos)
+msgpack>=1.0.7
+
+# --- Seguridad y Criptografía ---
+# Primitivas criptográficas (AES, RSA, hashing) para DMS y firmas
+cryptography>=42.0.0
+# libsodium binding: cifrado autenticado y curvas modernas para el duress signal
+pynacl>=1.5.0
+
+# --- UI / Logs en terminal ---
+# Salida estructurada y bonita para el orquestador
+rich>=13.7.0
+
+# --- Testing ---
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+
+# --- Utilidades varias ---
+# Parseo de configuración del DMS
+pyyaml>=6.0.1
+
+# ============================================================
+#  FASE 2 - Cerebro autónomo (LLM local + memoria + agente)
+# ============================================================
+
+# --- Motor LLM local (100% on-device, sin APIs externas) ---
+# Bindings Python para llama.cpp: corre modelos .gguf en CPU/GPU
+llama-cpp-python>=0.2.50
+# Descarga reproducible de modelos desde HF Hub (Phi-3, etc.)
+huggingface-hub>=0.20.0
+
+# --- Memoria vectorial persistente ---
+# Base de datos vectorial embebida (sin servidor) con persistencia local
+chromadb>=0.4.22
+# Embeddings semánticos locales (all-MiniLM, etc.) usados por ChromaDB
+sentence-transformers>=2.3.0
+
+# --- Agente autónomo y herramientas ---
+# Conteo preciso de tokens para presupuesto de contexto
+tiktoken>=0.5.0
+# Búsqueda web sin API key (DuckDuckGo) como herramienta del agente
+duckduckgo-search>=4.1.0
+
+# ============================================================
+#  FASE 3 - Daemon autónomo (auto-modificación + internet)
+# ============================================================
+
+# --- Internet (sin wrappers genéricos) ---
+# Cliente HTTP moderno con HTTP/2, async y sync (reemplaza requests)
+httpx>=0.26.0
+# Parser HTML ultra-rápido en C (alternativa ligera a BeautifulSoup)
+selectolax>=0.3.21
+# Operaciones git para clonar, leer y commitear repos
+gitpython>=3.1.40
+
+# --- Self-modification ---
+# Motor de refactoring para Python (mover, renombrar, extraer)
+rope>=1.12.0
+# Observador de cambios en filesystem (detecta cuando algo escribe sobre src/)
+watchdog>=3.0.0
+
+# --- Scheduling ---
+# Tareas periódicas del daemon (reflexión diaria, gc, etc.)
+apscheduler>=3.10.4
+
+# ============================================================
+#  FASE 5 - Detección autónoma de regresiones
+# ============================================================
+
+# --- Análisis estático ---
+# Caza undefined names (como `selfe.filter`), imports sin usar, etc.
+# Sin esto, una mutación con typo pasa los safeguards de Fase 4 y
+# queda dormida hasta que el operador la descubre por accidente.
+pyflakes>=3.2.0

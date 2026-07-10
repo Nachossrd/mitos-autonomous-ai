@@ -1,0 +1,38 @@
+{
+  "_instructions": "Copia este archivo a config/brain_pool.json y añade tus API keys. brain_pool.json está en .gitignore y NUNCA debe commitearse. Prioridad menor = más preferido. Borra una entry para deshabilitarla.",
+  "models": [
+    {
+      "provider": "gemini",
+      "api_key": "",
+      "model_name": "gemini-3.5-flash",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta",
+      "max_tokens": 8192,
+      "cost_per_1k": 0.0,
+      "supports_code": true,
+      "supports_vision": true,
+      "priority": 1
+    },
+    {
+      "provider": "groq",
+      "api_key": "",
+      "model_name": "llama-3.3-70b-versatile",
+      "base_url": "https://api.groq.com/openai/v1",
+      "max_tokens": 8192,
+      "cost_per_1k": 0.0,
+      "supports_code": true,
+      "supports_vision": false,
+      "priority": 2
+    },
+    {
+      "provider": "openrouter",
+      "api_key": "",
+      "model_name": "meta-llama/llama-3.3-70b-instruct:free",
+      "base_url": "https://openrouter.ai/api/v1",
+      "max_tokens": 4096,
+      "cost_per_1k": 0.0,
+      "supports_code": true,
+      "supports_vision": false,
+      "priority": 3
+    }
+  ]
+}
